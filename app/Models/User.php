@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // define relationship with chirps
+    // define relationship with chirps, this is Eloquent model
     public function chirps(){
         return $this->hasMany(Chirp::class);
     }

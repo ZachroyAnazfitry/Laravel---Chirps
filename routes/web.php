@@ -29,7 +29,14 @@ Route::get('/dashboard', function () {
 Route::resource('chirps', ChirpController::class)
     ->only(['index', 'store'])
     ->only(['index', 'store','update','edit','destroy'])
+
+    // auth middleware allow only logged in users to access above routes
+    // verified middleware used only for email verification
     ->middleware(['auth', 'verified']);
+
+Route::get('/wizard', function () {
+    return view('livewire.wizard');
+})->middleware(['auth', 'verified'])->name('wizard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
